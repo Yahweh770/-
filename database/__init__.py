@@ -1,5 +1,6 @@
-"""
-Пакет для работы с базой данных приложения KSK Shop.
+# kskapp/database/__init__.py
 
-В этом пакете находятся модули для инициализации и управления базой данных.
-"""
+from .session import engine, SessionLocal
+from ..models.models import Base  # вместо from kskapp.models.models import Base
+
+__all__ = ["engine", "SessionLocal", "Base"]
