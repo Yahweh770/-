@@ -1,50 +1,65 @@
 ```
-# Python
-__pycache__/
+# Compiled and build artifacts
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
+__pycache__/
+*.o
+*.obj
+
+# Dependencies
 .venv/
-.ENV
-.venv.bak/
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Build and distribution artifacts
-build/
-dist/
-*.egg
+venv/
+node_modules/
 *.egg-info/
+dist/
+build/
 *.so
-*.whl
+*.dylib
+*.dll
 
-# Testing
-.coverage
-coverage/
-htmlcov/
-.nosetests
-.pytest_cache/
-
-# Logs
+# Logs and temp files
 *.log
+*.tmp
+*.swp
+*.swo
 
 # Environment
 .env
 .env.local
-.env.*
-.env.local.*
+*.env.*
 
 # Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# Distribution / packaging
+.Python
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
 ```
