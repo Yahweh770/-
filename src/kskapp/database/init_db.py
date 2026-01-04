@@ -5,7 +5,7 @@
 """
 
 from .base import Base
-from models.models import *  # импортируем все модели для регистрации
+from ..models.models import *  # импортируем все модели для регистрации
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -22,11 +22,11 @@ def init_db(engine):
 
 # Глобальный объект SessionLocal для импорта в других модулях
 SessionLocal = sessionmaker(autoflush=False, autocommit=False)
-# kskapp/database/init_db.py
-from kskapp.database import Base, engine
+# Импорты для инициализации
+from . import Base, engine
 
 # ОБЯЗАТЕЛЬНО импортируем все модели, чтобы SQLAlchemy их "увидел"
-import kskapp.models.models
+from ..models import models
 
 def init_db():
     print("🔧 Инициализация базы данных...")
