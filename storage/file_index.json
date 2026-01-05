@@ -1,0 +1,84 @@
+{
+  "demo_file.txt": {
+    "original_name": "example_file.txt",
+    "stored_name": "demo_file.txt",
+    "size": 127,
+    "created": "2026-01-04T22:04:54",
+    "modified": "2026-01-04T22:04:42.216158",
+    "path": "/workspace/storage/demo_file.txt",
+    "tags": [
+      "text",
+      "demo",
+      "important",
+      "example",
+      "tutorial"
+    ]
+  },
+  "another_file.txt": {
+    "original_name": "another_file.txt",
+    "stored_name": "another_file.txt",
+    "size": 52,
+    "created": "2026-01-04T22:04:54",
+    "modified": "2026-01-04T22:04:54.664006",
+    "path": "/workspace/storage/another_file.txt",
+    "tags": [
+      "demo",
+      "text",
+      "secondary"
+    ]
+  },
+  "project_document.txt": {
+    "original_name": "example_file.txt",
+    "stored_name": "project_document.txt",
+    "size": 127,
+    "created": "2026-01-04T22:05:11",
+    "modified": "2026-01-04T22:04:42.216158",
+    "path": "/workspace/storage/project_document.txt",
+    "tags": [
+      "needs_review",
+      "important",
+      "document",
+      "project",
+      "example"
+    ]
+  },
+  "demo_file_1.txt": {
+    "original_name": "example_file.txt",
+    "stored_name": "demo_file_1.txt",
+    "size": 127,
+    "created": "2026-01-04T22:13:39",
+    "modified": "2026-01-04T22:04:42.216158",
+    "path": "/workspace/storage/demo_file_1.txt",
+    "tags": [
+      "demo",
+      "text",
+      "example"
+    ]
+  },
+  "another_file_1.txt": {
+    "original_name": "another_file.txt",
+    "stored_name": "another_file_1.txt",
+    "size": 52,
+    "created": "2026-01-04T22:13:39",
+    "modified": "2026-01-04T22:13:39.664006",
+    "path": "/workspace/storage/another_file_1.txt",
+    "tags": [
+      "demo",
+      "text",
+      "secondary"
+    ]
+  },
+  "project_document_1.txt": {
+    "original_name": "example_file.txt",
+    "stored_name": "project_document_1.txt",
+    "size": 127,
+    "created": "2026-01-04T22:13:42",
+    "modified": "2026-01-04T22:04:42.216158",
+    "path": "/workspace/storage/project_document_1.txt",
+    "tags": [
+      "document",
+      "project",
+      "example"
+    ]
+  }
+}

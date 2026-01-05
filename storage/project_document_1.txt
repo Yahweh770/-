@@ -1,0 +1,2 @@
+This is an example file to demonstrate the file storage system.
+It contains some sample content that we can store and retrieve.
