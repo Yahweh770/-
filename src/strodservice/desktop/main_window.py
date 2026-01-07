@@ -1,5 +1,5 @@
 """
-Модуль главного окна приложения KSK Shop.
+Модуль главного окна приложения Strod-Service Technology.
 
 Этот модуль содержит класс главного окна приложения с расширенным интерфейсом.
 """
@@ -12,10 +12,10 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 import os
-from utils.image_handler import ImageHandler
-from desktop.objects_window import ObjectsWindow
-from desktop.materials_window import MaterialsWindow
-from desktop.reports_window import ReportsWindow
+from strodservice.utils.image_handler import ImageHandler
+from strodservice.desktop.objects_window import ObjectsWindow
+from strodservice.desktop.materials_window import MaterialsWindow
+from strodservice.desktop.reports_window import ReportsWindow
 
 
 class MainWindow(QMainWindow):
@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
     """
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("KSK Shop - Система управления проектами")
+        self.setWindowTitle("Strod-Service Technology - Система управления проектами")
         self.setGeometry(100, 100, 1000, 700)
         
         # Инициализация обработчика изображений
@@ -38,13 +38,13 @@ class MainWindow(QMainWindow):
         main_layout = QVBoxLayout()
         
         # Заголовок
-        title_label = QLabel("Добро пожаловать в KSK Shop")
+        title_label = QLabel("Добро пожаловать в Strod-Service Technology")
         title_label.setAlignment(Qt.AlignCenter)
         title_label.setStyleSheet("font-size: 18px; font-weight: bold; margin: 10px;")
         
         # Описание системы
         description_label = QLabel(
-            "Система управления проектами KSK Shop для учета материалов и объектов"
+            "Система управления проектами Strod-Service Technology для учета материалов и объектов"
         )
         description_label.setAlignment(Qt.AlignCenter)
         description_label.setWordWrap(True)

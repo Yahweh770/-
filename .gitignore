@@ -1,81 +1,73 @@
-```gitignore
+```
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Coverage
+.coverage
+htmlcov/
+.coverage.*
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+
+# Distribution / packaging
 .Python
 env/
 venv/
-.venv/
+ENV/
 pip-log.txt
 pip-delete-this-directory.txt
-.pytest_cache/
-.coverage
-htmlcov/
 .tox/
+.coverage
 .coverage.*
-.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
 .pytest_cache/
 .hypothesis/
 
-# Database
-*.db
-*.db-journal
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
-*.temp
-*.swp
-*.swo
-
-# Environment files
-.env
-.env.local
-.env.*
-!.env.example
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-Icon?
-```
-
-Wait, I need to reconsider this. Looking at the file changes again, I see that the deleted files include `__pycache__` directories and `.pyc` files, which means these are build artifacts that should be ignored. Let me provide the correct .gitignore:
-
-```gitignore
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Database files
-*.db
-
-# Logs
-*.log
-
-# Environment files
-.env
-.env.local
-.env.*
-
-# Temporary files
-*.tmp
-*.temp
-*.swp
-*.swo
-
-# OS generated files
+# System
 .DS_Store
 Thumbs.db
 ```

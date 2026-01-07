@@ -1,5 +1,5 @@
 """
-Модуль окна формирования отчетов для приложения KSK Shop.
+Модуль окна формирования отчетов для приложения Strod-Service Technology.
 
 Этот модуль содержит класс окна для формирования отчетов по проектам.
 """
@@ -11,9 +11,8 @@ from PyQt5.QtWidgets import (
     QComboBox
 )
 from PyQt5.QtCore import Qt, QDate
-from database.init_db import SessionLocal
-from models.models import Object, Material, FieldData
-from main import engine
+from strodservice.database.init_db import SessionLocal, engine
+from strodservice.models.models import Object, Material, FieldData
 from datetime import datetime
 
 
