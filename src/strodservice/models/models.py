@@ -5,7 +5,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
-from kskapp.database.base import Base
+from strodservice.database.base import Base
 
 class Organization(Base):
     __tablename__ = 'organizations'
