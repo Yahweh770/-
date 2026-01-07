@@ -1,5 +1,5 @@
 """
-Модуль инициализации базы данных для приложения KSK Shop.
+Модуль инициализации базы данных для приложения Strod-Service Technology.
 
 Этот модуль отвечает за создание таблиц в базе данных.
 """
@@ -8,30 +8,30 @@ from .base import Base
 from ..models.models import *  # импортируем все модели для регистрации
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import sys
+from pathlib import Path
 
-
-def init_db(engine):
-    """
-    Инициализация базы данных и создание таблиц.
-    
-    Args:
-        engine: Объект SQLAlchemy engine для подключения к базе данных
-    """
-    Base.metadata.create_all(bind=engine)
-
-
-# Глобальный объект SessionLocal для импорта в других модулях
-SessionLocal = sessionmaker(autoflush=False, autocommit=False)
-# Импорты для инициализации
-from . import Base, engine
-
-# ОБЯЗАТЕЛЬНО импортируем все модели, чтобы SQLAlchemy их "увидел"
-from ..models import models
-
-def init_db():
+def init_db(db_path=None):
+    """Инициализация базы данных и создание таблиц."""
     print("🔧 Инициализация базы данных...")
+    # Если путь к базе данных не передан, используем путь по умолчанию
+    if db_path is None:
+        # Импортируем путь к данным из main, если возможно
+        try:
+            from ..main import DATA_DIR
+            db_path = DATA_DIR / "ksk.db"
+        except ImportError:
+            # Если не удается импортировать, используем относительный путь
+            db_path = Path.cwd() / "data" / "ksk.db"
+    
+    # Создаем директорию, если она не существует
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    engine = create_engine(f"sqlite:///{db_path}", echo=False)
     Base.metadata.create_all(bind=engine)
-    print("✅ Таблицы созданы:", Base.metadata.tables.keys())
+    print("✅ Таблицы созданы:", list(Base.metadata.tables.keys()))
+    return engine
+
 
 if __name__ == "__main__":
     init_db()

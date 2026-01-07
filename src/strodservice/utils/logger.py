@@ -5,11 +5,11 @@ from logging.handlers import RotatingFileHandler
 from typing import Optional
 
 # Добавляем корень проекта в sys.path (для импортов внутри utils)
-BASE_DIR = Path(__file__).resolve().parents[2]  # utils → kskapp → src → корень
+BASE_DIR = Path(__file__).resolve().parents[2]  # utils → strodservice → src → корень
 sys.path.insert(0, str(BASE_DIR))
 
 def setup_logger(
-    name: str = "kskapp",
+    name: str = "strodservice",
     log_file: Optional[Path] = None,
     level: int = logging.INFO
 ) -> logging.Logger:
@@ -17,7 +17,7 @@ def setup_logger(
     Настройка ротационного логгера с поддержкой путей проекта
     
     Args:
-        name: Имя логгера (по умолчанию 'kskapp')
+        name: Имя логгера (по умолчанию 'strodservice')
         log_file: Путь к файлу лога (по умолчанию BASE_DIR/logs/app.log)
         level: Уровень логирования (INFO по умолчанию)
     

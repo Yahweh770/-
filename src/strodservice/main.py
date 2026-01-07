@@ -18,7 +18,7 @@ else:
     MEIPASS_DIR = BASE_DIR
 
 # При использовании proper package structure, sys.path добавление не требуется
-# когда запускаем как python -m src.kskapp.main
+# когда запускаем как python -m src.strodservice.main
 
 # Функция для получения пути к ресурсам (иконки, база, файлы)
 def resource_path(relative_path):
