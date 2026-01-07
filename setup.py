@@ -19,7 +19,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "executive-doc-tool=main_window:main",
+            "kskapp=src.kskapp.main:main",
         ],
     },
     classifiers=[

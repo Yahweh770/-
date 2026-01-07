@@ -1,5 +1,5 @@
 """
-Модуль окна управления материалами для приложения KSK Shop.
+Модуль окна управления материалами для приложения Strod-Service Technology.
 
 Этот модуль содержит класс окна для управления материалами проекта.
 """
@@ -10,9 +10,8 @@ from PyQt5.QtWidgets import (
     QHeaderView, QDoubleSpinBox
 )
 from PyQt5.QtCore import Qt
-from database.init_db import SessionLocal
-from models.models import Material
-from main import engine
+from strodservice.database.init_db import SessionLocal, engine
+from strodservice.models.models import Material
 
 
 class MaterialsWindow(QWidget):
