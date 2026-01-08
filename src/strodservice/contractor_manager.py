@@ -8,8 +8,8 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QTableWidget, QTableWidgetItem,
     QPushButton, QFormLayout, QLineEdit, QDialog, QDialogButtonBox, QMessageBox
 )
-from database.models import Contractor
-from database.init_db import Session
+from strodservice.models.models import Contractor
+from strodservice.database.init_db import SessionLocal
 
 class ContractorForm(QWidget):
     def __init__(self):
@@ -31,7 +31,7 @@ class ContractorForm(QWidget):
         self.layout.addWidget(btn_add)
 
     def load_contractors(self):
-        session = Session()
+        session = SessionLocal()
         contractors = session.query(Contractor).all()
         self.table.setRowCount(len(contractors))
         for i, c in enumerate(contractors):
@@ -74,7 +74,7 @@ class ContractorForm(QWidget):
 
     def save_contractor(self, name, inn, dialog):
         if name and inn:
-            session = Session()
+            session = SessionLocal()
             new_contractor = Contractor(name=name, inn=inn)
             session.add(new_contractor)
             session.commit()
@@ -85,7 +85,7 @@ class ContractorForm(QWidget):
             QMessageBox.warning(self, "Ошибка", "Заполните все поля!")
 
     def edit_contractor(self, id):
-        session = Session()
+        session = SessionLocal()
         contractor = session.query(Contractor).get(id)
         if not contractor:
             return
@@ -109,7 +109,7 @@ class ContractorForm(QWidget):
         session.close()
 
     def update_contractor(self, id, name, inn, dialog):
-        session = Session()
+        session = SessionLocal()
         contractor = session.query(Contractor).get(id)
         if contractor:
             contractor.name = name
@@ -122,7 +122,7 @@ class ContractorForm(QWidget):
     def delete_contractor(self, id):
         reply = QMessageBox.question(self, "Удалить", "Вы уверены?", QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
-            session = Session()
+            session = SessionLocal()
             contractor = session.query(Contractor).get(id)
             if contractor:
                 session.delete(contractor)

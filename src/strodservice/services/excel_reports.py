@@ -5,12 +5,12 @@ import sys
 BASE_DIR = Path(__file__).resolve().parents[2]   # два уровня вверх → корень проекта
 sys.path.insert(0, str(BASE_DIR))
 import pandas as pd
-from database.models import FieldData, Object
-from database.init_db import Session
+from strodservice.models.models import FieldData, Object
+from strodservice.database.init_db import SessionLocal
 from datetime import datetime
 
 def generate_excel_report(filepath):
-    session = Session()
+    session = SessionLocal()
     data = session.query(FieldData).all()
     objects = session.query(Object).all()
     session.close()

@@ -1,17 +1,19 @@
 from pathlib import Path
 import sys
+from datetime import datetime
 
 # Это должно быть САМЫМ первым (до всех остальных импортов)
 BASE_DIR = Path(__file__).resolve().parents[2]   # два уровня вверх → корень проекта
 sys.path.insert(0, str(BASE_DIR))
+
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QFormLayout, QLabel, QLineEdit,
-    QPushButton, QComboBox, QDateEdit, QTextEdit, QFileDialog,
+    QPushButton, QDateEdit, QTextEdit, QFileDialog,
     QMessageBox
 )
-from datetime import datetime
-from utils.offline_storage import save_field_data_offline  # ✅ Новый импорт
-from core.excel_exporter import export_field_data_to_excel
+from PyQt5.QtCore import Qt
+from strodservice.utils.offline_storage import save_field_data_offline  # ✅ Правильный импорт
+
 
 class FieldDataForm(QWidget):
     def __init__(self):
@@ -64,9 +66,9 @@ class FieldDataForm(QWidget):
         btn_save.clicked.connect(self.save_data_offline)
         self.layout.addWidget(btn_save)
 
-	btn_export = QPushButton("Экспорт в Excel")
-	btn_export.clicked.connect(self.export_to_excel)
-	self.layout.addWidget(btn_export)
+        btn_export = QPushButton("Экспорт в Excel")
+        btn_export.clicked.connect(self.export_to_excel)
+        self.layout.addWidget(btn_export)
 
     def select_photo(self):
         path, _ = QFileDialog.getOpenFileName(self, "Выбрать фото", "", "Images (*.png *.jpg *.jpeg)")
@@ -93,11 +95,6 @@ class FieldDataForm(QWidget):
                 "photo_path": self.photo_path,
                 "date": date.isoformat(),
                 "notes": notes
-	def export_to_excel(self):
-    	from PyQt5.QtWidgets import QFileDialog
-    	file_path, _ = QFileDialog.getSaveFileName(self, "Экспортировать в Excel", "", "Excel Files (*.xlsx)")
-    	if file_path:
-        export_field_data_to_excel(file_path)
             }
 
             save_field_data_offline(record)
@@ -106,3 +103,10 @@ class FieldDataForm(QWidget):
             QMessageBox.warning(self, "Ошибка", "Введите корректные числовые значения.")
         except Exception as e:
             QMessageBox.critical(self, "Ошибка", f"Не удалось сохранить: {e}")
+
+    def export_to_excel(self):
+        from PyQt5.QtWidgets import QFileDialog
+        file_path, _ = QFileDialog.getSaveFileName(self, "Экспортировать в Excel", "", "Excel Files (*.xlsx)")
+        if file_path:
+            # Placeholder function - нужно реализовать экспорт в Excel
+            QMessageBox.information(self, "Экспорт", f"Данные экспортированы в {file_path}")

@@ -11,8 +11,14 @@ from sqlalchemy.orm import sessionmaker
 import sys
 from pathlib import Path
 
+# Глобальные переменные для подключения к базе данных
+engine = None
+SessionLocal = None
+
+
 def init_db(db_path=None):
     """Инициализация базы данных и создание таблиц."""
+    global engine, SessionLocal
     print("🔧 Инициализация базы данных...")
     # Если путь к базе данных не передан, используем путь по умолчанию
     if db_path is None:
@@ -28,6 +34,7 @@ def init_db(db_path=None):
     db_path.parent.mkdir(parents=True, exist_ok=True)
     
     engine = create_engine(f"sqlite:///{db_path}", echo=False)
+    SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
     Base.metadata.create_all(bind=engine)
     print("✅ Таблицы созданы:", list(Base.metadata.tables.keys()))
     return engine
