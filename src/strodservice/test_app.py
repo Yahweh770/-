@@ -1,5 +1,5 @@
 """
-Тестовый скрипт для проверки работоспособности приложения KSK Shop.
+Тестовый скрипт для проверки работоспособности приложения Strod-Service Technology.
 """
 
 import sys
@@ -94,7 +94,7 @@ def test_image_handler():
 
 def main():
     """Основная функция тестирования."""
-    print("Запуск тестирования приложения KSK Shop...")
+    print("Запуск тестирования приложения Strod-Service Technology...")
     print("=" * 50)
     
     all_tests_passed = True

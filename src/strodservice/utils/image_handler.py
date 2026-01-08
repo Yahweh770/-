@@ -1,5 +1,5 @@
 """
-Модуль для обработки изображений и фотоотчетов в приложении KSK Shop.
+Модуль для обработки изображений и фотоотчетов в приложении Strod-Service Technology.
 
 Этот модуль предоставляет функции для:
 - Загрузки и сохранения изображений
@@ -198,14 +198,16 @@ def scale_pixmap(pixmap, max_width, max_height, keep_aspect_ratio=True):
         QPixmap: Масштабированное изображение
     """
     if keep_aspect_ratio:
+        from PyQt5.QtCore import Qt
         return pixmap.scaled(
             max_width, max_height,
-            aspectRatioMode=1,  # Qt.KeepAspectRatio
-            transformMode=2     # Qt.SmoothTransformation
+            Qt.KeepAspectRatio,
+            Qt.SmoothTransformation
         )
     else:
+        from PyQt5.QtCore import Qt
         return pixmap.scaled(
             max_width, max_height,
-            aspectRatioMode=0,  # Qt.IgnoreAspectRatio
-            transformMode=2     # Qt.SmoothTransformation
+            Qt.IgnoreAspectRatio,
+            Qt.SmoothTransformation
         )
