@@ -2,6 +2,21 @@
 
 Advanced construction service management system with integrated file storage and reporting capabilities.
 
+## Установщики
+
+В дополнение к основному приложению, в репозитории представлены два варианта установщика:
+
+- **`installer_demo.py`** - графический установщик с интерфейсом на tkinter
+- **`console_installer.py`** - консольный установщик для терминальных систем
+- **`INSTALLER_README.md`** - подробная документация по установщикам
+- **`INSTALLERS_OVERVIEW.md`** - сводный обзор всех установщиков и их возможностей
+- **`run_installers.sh`** - скрипт для удобного запуска установщиков
+- **`test_installers.py`** - скрипт для проверки работоспособности установщиков
+- **`setup_installers.py`** - файл для установки установщиков как Python-пакета
+- **`INSTALLER_COMPARISON.md`** - сравнение демонстрационных и настоящих установщиков
+- **`USAGE_GUIDE.md`** - руководство по использованию установщиков
+- **`nsis_example.nsi`** - пример скрипта для NSIS
+
 ## Features
 
 - Comprehensive database management for construction projects
