@@ -1,4 +1,5 @@
 import sys
+import traceback
 from pathlib import Path
 import logging
 
@@ -35,30 +36,61 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # --- Импорт собственных модулей ---
-from strodservice.utils.logger import setup_logger
-from strodservice.database.init_db import init_db
-from strodservice.desktop.main_window import MainWindow  # ← исправлено на абсолютный импорт
+from .utils.logger import setup_logger
+from .database.init_db import init_db
+from .desktop.main_window import MainWindow  # ← исправлено на абсолютный импорт
 from PyQt5.QtWidgets import QApplication
+from .config.settings import settings
+from .exceptions import BaseStrodServiceException
 
 # --- Engine базы данных ---
 DB_FILE = DATA_DIR / "ksk.db"
-from strodservice.database.init_db import engine, SessionLocal
+from .database.init_db import engine, SessionLocal
 
 def main():
     """Main entry point for the application."""
-    logger = setup_logger(name="strodservice-main", level=logging.INFO)
-    logger.info("🚀 Запуск Strod-Service Technology приложения")
-
-    # Инициализация базы данных
-    init_db()
-    logger.info("✅ База данных инициализирована")
-
-    # Создание и запуск Qt приложения
-    qt_app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    logger.info("Главное окно отображено")
-    sys.exit(qt_app.exec())
+    try:
+        logger = setup_logger(name="strodservice-main", level=getattr(logging, settings.LOG_LEVEL))
+        logger.info("🚀 Запуск Strod-Service Technology приложения")
+        
+        # Log important configuration values (without sensitive data)
+        logger.info(f"App Version: {settings.APP_VERSION}")
+        logger.info(f"Environment: {settings.ENVIRONMENT}")
+        logger.info(f"Debug Mode: {settings.DEBUG}")
+        
+        # Инициализация базы данных
+        init_db()
+        logger.info("✅ База данных инициализирована")
+        
+        # Создание и запуск Qt приложения
+        qt_app = QApplication(sys.argv)
+        window = MainWindow()
+        window.show()
+        logger.info("Главное окно отображено")
+        
+        # Run the application and handle exit codes
+        exit_code = qt_app.exec_()
+        logger.info(f"Приложение завершено с кодом выхода: {exit_code}")
+        return exit_code
+        
+    except BaseStrodServiceException as e:
+        # Handle known application exceptions
+        error_msg = f"Ошибка приложения: {e.message}"
+        print(error_msg, file=sys.stderr)
+        logging.error(error_msg)
+        return 1
+    except KeyboardInterrupt:
+        print("\nПриложение прервано пользователем", file=sys.stderr)
+        logging.info("Приложение прервано пользователем")
+        return 0
+    except Exception as e:
+        # Handle unexpected errors
+        error_msg = f"Неожиданная ошибка: {str(e)}"
+        print(error_msg, file=sys.stderr)
+        print(traceback.format_exc(), file=sys.stderr)
+        logging.error(error_msg, exc_info=True)
+        return 1
 
 if __name__ == "__main__":
-    main()
+    exit_code = main()
+    sys.exit(exit_code)

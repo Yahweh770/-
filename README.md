@@ -1,81 +1,99 @@
-# Strod-Service Technology - Система управления проектами
+# Strod-Service Technology Application
 
-Система управления проектами для учета материалов и объектов с возможностью загрузки фотоотчетов.
+Advanced construction service management system with integrated file storage and reporting capabilities.
 
-## Описание
+## Features
 
-Strod-Service Technology - это приложение для управления проектами, которое позволяет:
-- Управлять объектами и их характеристиками
-- Учитывать материалы и нормы расхода
-- Отслеживать типы линий и их параметры
-- Вести учет полевых данных и отчетов
-- Управлять подрядчиками и документами
-- Формировать отчеты и анализировать данные
-- Загружать и просматривать фотоотчеты
-- Работать с базой данных для хранения всей информации
-- Хранить и управлять файлами с помощью встроенной системы файлового хранения
+- Comprehensive database management for construction projects
+- Advanced file storage system with tagging and search capabilities
+- Integrated reporting and document generation
+- Modern GUI interface built with PyQt5
+- Configurable settings and environment management
+- Comprehensive error handling and logging
 
-## Структура проекта
+## Project Structure
 
-- `main.py` - основной файл запуска приложения
-- `models/models.py` - модели базы данных
-- `utils/logger.py` - система логирования
-- `utils/image_handler.py` - обработка изображений
-- `database/` - модули работы с базой данных
-- `desktop/main_window.py` - основное окно приложения с функционалом загрузки фото
-- `desktop/objects_window.py` - окно управления объектами
-- `desktop/materials_window.py` - окно управления материалами
-- `desktop/reports_window.py` - окно формирования отчетов
-- `src/kskapp/filestorage/` - модуль файлового хранения
-- `interact_filestorage.py` - интерактивный интерфейс для работы с файловым хранилищем
-- `assets/` - ресурсы приложения (иконки, изображения)
-- `utils/` - служебные утилиты
-- `resources/` - дополнительные ресурсы
-
-## Файловое хранилище
-
-В проект встроена система файлового хранения, которая позволяет:
-- Хранить файлы с автоматическим сбором метаданных
-- Поиск файлов по имени, тегам или расширению
-- Организовывать файлы с помощью тегов
-- Программно загружать содержимое файлов
-- Управлять файлами через постоянный индекс
-
-Для взаимодействия с файловым хранилищем используйте:
-- `interact_filestorage.py` - интерактивный командный интерфейс
-- `src/kskapp/filestorage/` - основной модуль хранения
-- `src/kskapp/filestorage_demo.py` - пример использования
-
-## Установка и запуск
-
-Для запуска приложения выполните:
-
-```bash
-pip install -r requirements.txt
-python main.py
+```
+/workspace/
+├── src/
+│   └── strodservice/           # Main application source code
+│       ├── config/             # Configuration management
+│       ├── database/           # Database models and operations
+│       ├── desktop/            # GUI components
+│       ├── filestorage/        # File storage system
+│       ├── models/             # Data models
+│       ├── services/           # Business logic services
+│       ├── utils/              # Utility functions
+│       └── main.py             # Application entry point
+├── tests/                      # Test suite
+│   ├── unit/                   # Unit tests
+│   └── integration/            # Integration tests
+├── storage/                    # Default file storage directory
+├── data/                       # Database files
+├── docs/                       # Documentation
+├── requirements.txt            # Dependencies
+├── pyproject.toml              # Project configuration
+└── README.md                   # This file
 ```
 
-Для запуска интерактивного интерфейса файлового хранилища:
+## Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file in the root directory with configuration variables:
+   ```env
+   DATABASE_URL=sqlite:///./data/strodservice.db
+   STORAGE_PATH=./storage
+   DEBUG=true
+   LOG_LEVEL=INFO
+   ```
+
+## Running the Application
+
 ```bash
-python interact_filestorage.py
+python -m src.strodservice.main
 ```
 
-## Зависимости
+## Running Tests
 
-- Python 3.7+
-- PyQt5
-- SQLAlchemy
-- Pillow
+```bash
+# Run all tests
+pytest
 
-## Функциональность
+# Run specific test file
+pytest tests/unit/test_models.py
 
-- Управление объектами
-- Учет материалов
-- Регистрация полевых данных
-- Формирование отчетов
-- Управление подрядчиками
-- Загрузка и просмотр фотоотчетов
-- Редактирование и удаление записей
-- Фильтрация данных
-- Экспорт отчетов
-- Хранение и управление файлами
+# Run with coverage
+pytest --cov=src.strodservice
+```
+
+## Configuration
+
+The application uses a settings management system with the following hierarchy:
+1. Environment variables
+2. `.env` file
+3. Default values
+
+Key configuration options:
+- `DATABASE_URL`: Database connection string
+- `STORAGE_PATH`: Directory for file storage
+- `MAX_FILE_SIZE`: Maximum allowed file size in bytes
+- `ALLOWED_FILE_EXTENSIONS`: Comma-separated list of allowed file extensions
+- `DEBUG`: Enable/disable debug mode
+- `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+
+## Development
+
+To contribute to the project:
+1. Create a feature branch
+2. Make your changes
+3. Write/update tests
+4. Run tests to ensure everything works
+5. Submit a pull request
+
+## License
+
+MIT License

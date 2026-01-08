@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "strodservice"
+version = "1.0.0"
+description = "Strod-Service Technology Application"
+readme = "README.md"
+authors = [
+    {name = "Strod-Service Team", email = "team@strodservice.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "PyQt5>=5.15.9",
+    "SQLAlchemy>=2.0.4",
+    "openpyxl>=3.1.2",
+    "python-docx>=0.8.11",
+    "requests>=2.28.2",
+    "psycopg2-binary>=2.9.5",
+    "alembic>=1.10.2",
+    "python-dotenv>=0.19.2",
+    "Pillow>=9.4.0",
+    "pyinstaller>=5.13.0",
+]
+
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "flake8>=6.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "types-python-dotenv>=0.19.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Strod-Service/strodservice"
+Repository = "https://github.com/Strod-Service/strodservice"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+strodservice = ["assets/*", "resources/*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-ra -q"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/__pycache__/*", "*/venv/*", "*/env/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:"
+]
