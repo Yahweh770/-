@@ -1,0 +1,6 @@
+@echo off
+echo Компилирую проект Strod-Service Technology в исполняемый файл...
+python build_exe.py
+echo.
+echo Процесс компиляции завершен. Нажмите любую клавишу для выхода...
+pause >nul

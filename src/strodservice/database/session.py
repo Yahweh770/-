@@ -1,21 +1,32 @@
 import sys
 import os
+from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from ..config.settings import settings
 
-# Путь к директории exe или скрипта
-if getattr(sys, 'frozen', False):
-    # Если запущено как exe через PyInstaller
-    BASE_DIR = os.path.dirname(sys.executable)
-else:
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Use the configured database URL from settings
+engine = create_engine(
+    settings.DATABASE_URL,
+    echo=settings.DEBUG,
+    future=True,
+    pool_size=settings.DATABASE_POOL_SIZE,
+    pool_timeout=settings.DATABASE_POOL_TIMEOUT,
+    pool_pre_ping=True,  # Verify connections before use
+)
 
-# Путь к файлу базы
-DB_PATH = os.path.join(BASE_DIR, "strodservice.db")
-
-# Создаём папку, если её нет
-if not os.path.exists(BASE_DIR):
-    os.makedirs(BASE_DIR)
-
-engine = create_engine(f"sqlite:///{DB_PATH}", echo=False, future=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+
+
+@contextmanager
+def get_db_session():
+    """Context manager for database sessions with automatic commit/rollback."""
+    session = SessionLocal()
+    try:
+        yield session
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()
