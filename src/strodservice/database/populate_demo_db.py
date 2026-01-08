@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # один уровень в�
 sys.path.insert(0, str(BASE_DIR))
 
 from sqlalchemy.orm import sessionmaker
-from strodservice.database.session import engine, SessionLocal
+from strodservice.database.init_db import engine, SessionLocal
 from strodservice.models.models import (
     Object, Material, Organization, LineType, Contractor, Document, FieldData, Base
 )

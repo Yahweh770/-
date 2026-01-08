@@ -42,8 +42,7 @@ from PyQt5.QtWidgets import QApplication
 
 # --- Engine базы данных ---
 DB_FILE = DATA_DIR / "ksk.db"
-engine = create_engine(f"sqlite:///{DB_FILE}", echo=False)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+from strodservice.database.init_db import engine, SessionLocal
 
 def main():
     """Main entry point for the application."""

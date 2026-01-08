@@ -18,23 +18,23 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 # Имитация подключения к базе и моделей
-from database.models import Object, Material, Document
-from database.init_db import Session
-from core.gost_engine import get_material_norm
-from core.gpr_integration import get_gpr_data
-from core.calc_engine import calculate_materials_for_object
-from core.notifications import notify_manager_low_material
-from core.contractor_manager import ContractorForm
-from core.reports import generate_materials_report
-from api.fuel_card_api import get_fuel_balance, get_fuel_transactions
-from utils.telegram_bot import send_telegram_message
-from utils.logger import app_logger
-from utils.updater import update_app
-from utils.autostart import add_to_startup, remove_from_startup
-from utils.settings_manager import SettingsWidget
-from utils.error_reporter import report_error
-from core.field_data_form import FieldDataForm
-from core.offline_calc import OfflineCalcWidget
+from strodservice.models.models import Object, Material, Document
+from strodservice.database.init_db import SessionLocal
+from strodservice.gost_engine import get_material_norm
+from strodservice.integrations.gpr_integration import get_gpr_data
+from strodservice.calc_engine import calculate_materials_for_object
+from strodservice.notifications import notify_manager_low_material
+from strodservice.contractor_manager import ContractorForm
+from strodservice.services.reports import generate_materials_report
+from strodservice.apifuel_card_api import get_fuel_balance, get_fuel_transactions
+from strodservice.utils.telegram_bot import send_telegram_message
+from strodservice.utils.logger import app_logger
+from strodservice.utils.updater import update_app
+from strodservice.utils.autostart import add_to_startup, remove_from_startup
+from strodservice.config.settings_manager import SettingsWidget
+from strodservice.services.error_reporter import report_error
+from strodservice.field_data_form import FieldDataForm
+from strodservice.utils.offline_calc import OfflineCalcWidget
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -147,7 +147,7 @@ class MainWindow(QMainWindow):
 
     def load_objects_to_table(self):
         try:
-            session = Session()
+            session = SessionLocal()
             objects = session.query(Object).all()
             self.objects_table.setRowCount(len(objects))
             for i, obj in enumerate(objects):
@@ -207,7 +207,7 @@ class MainWindow(QMainWindow):
     def save_new_object(self, name, location, dialog):
         if name and location:
             try:
-                session = Session()
+                session = SessionLocal()
                 new_obj = Object(name=name, location=location)
                 session.add(new_obj)
                 session.commit()
@@ -223,7 +223,7 @@ class MainWindow(QMainWindow):
     def edit_object(self, obj_id):
         try:
             from PyQt5.QtWidgets import QDialog, QDialogButtonBox
-            session = Session()
+            session = SessionLocal()
             obj = session.query(Object).get(obj_id)
             if not obj:
                 return
@@ -251,7 +251,7 @@ class MainWindow(QMainWindow):
 
     def update_object(self, obj_id, name, location, dialog):
         try:
-            session = Session()
+            session = SessionLocal()
             obj = session.query(Object).get(obj_id)
             if obj:
                 obj.name = name
@@ -268,7 +268,7 @@ class MainWindow(QMainWindow):
         reply = QMessageBox.question(self, "Удалить", "Вы уверены?", QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             try:
-                session = Session()
+                session = SessionLocal()
                 obj = session.query(Object).get(obj_id)
                 if obj:
                     session.delete(obj)
@@ -333,7 +333,7 @@ class MainWindow(QMainWindow):
 
     def load_materials_to_table(self):
         try:
-            session = Session()
+            session = SessionLocal()
             materials = session.query(Material).all()
             self.materials_table.setRowCount(len(materials))
             for i, mat in enumerate(materials):
@@ -399,7 +399,7 @@ class MainWindow(QMainWindow):
     def save_new_material(self, name, unit, norm, dialog):
         if name and unit and norm:
             try:
-                session = Session()
+                session = SessionLocal()
                 new_mat = Material(name=name, unit=unit, norm=norm)
                 session.add(new_mat)
                 session.commit()
@@ -415,7 +415,7 @@ class MainWindow(QMainWindow):
     def edit_material(self, mat_id):
         try:
             from PyQt5.QtWidgets import QDialog, QDialogButtonBox
-            session = Session()
+            session = SessionLocal()
             mat = session.query(Material).get(mat_id)
             if not mat:
                 return
@@ -445,7 +445,7 @@ class MainWindow(QMainWindow):
 
     def update_material(self, mat_id, name, unit, norm, dialog):
         try:
-            session = Session()
+            session = SessionLocal()
             mat = session.query(Material).get(mat_id)
             if mat:
                 mat.name = name
@@ -463,7 +463,7 @@ class MainWindow(QMainWindow):
         reply = QMessageBox.question(self, "Удалить", "Вы уверены?", QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             try:
-                session = Session()
+                session = SessionLocal()
                 mat = session.query(Material).get(mat_id)
                 if mat:
                     session.delete(mat)
@@ -477,7 +477,7 @@ class MainWindow(QMainWindow):
     # ✅ Проверка нехватки материалов
     def check_low_materials(self):
         try:
-            session = Session()
+            session = SessionLocal()
             materials = session.query(Material).all()
             for mat in materials:
                 current_stock = getattr(mat, 'current_stock', 0)
@@ -658,7 +658,7 @@ class MainWindow(QMainWindow):
 
     def load_documents_to_table(self):
         try:
-            session = Session()
+            session = SessionLocal()
             documents = session.query(Document).all()
             self.documents_table.setRowCount(len(documents))
             for i, doc in enumerate(documents):
@@ -713,7 +713,7 @@ class MainWindow(QMainWindow):
         reply = QMessageBox.question(self, "Удалить", "Вы уверены?", QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             try:
-                session = Session()
+                session = SessionLocal()
                 doc = session.query(Document).get(doc_id)
                 if doc:
                     session.delete(doc)
