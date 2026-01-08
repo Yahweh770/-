@@ -24,7 +24,9 @@ class ObjectsWindow(QWidget):
         self.setGeometry(200, 200, 900, 600)
         
         # Создаем сессию базы данных
-        SessionLocal.configure(bind=engine)
+        from strodservice.database.init_db import engine
+        from sqlalchemy.orm import sessionmaker
+        SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
         self.session = SessionLocal()
         
         self.init_ui()

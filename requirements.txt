@@ -1,4 +1,5 @@
-# Зависимости для приложения KSK Shop
+# Зависимости для приложения Strod-Service Technology
 PyQt5>=5.15.0
 SQLAlchemy>=1.4.0
 Pillow>=8.0.0
+setuptools>=60.0.0

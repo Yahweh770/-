@@ -10,18 +10,17 @@ with open("requirements.txt") as f:
     requirements = f.read().splitlines()
 
 setup(
-    name="executive-documentation-tool",
+    name="strodservice",
     version="1.0.0",
-    description="Программа для формирования исполнительной документации в сфере дорожной разметки",
-    author="Your Name",
-    author_email="your.email@example.com",
+    description="Программа для управления проектами Strod-Service Technology",
+    author="Strod-Service Technology Team",
+    author_email="support@strodservice.example.com",
     packages=find_packages(),
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "kskapp=src.kskapp.main:main",
+            "strodservice=src.strodservice.main:main",
         ],
-    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

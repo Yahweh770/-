@@ -14,7 +14,7 @@ if getattr(sys, 'frozen', False):
     MEIPASS_DIR = Path(sys._MEIPASS)  # PyInstaller временная папка
 else:
     # Обычный запуск из Python
-    BASE_DIR = Path(__file__).resolve().parent.parent
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent  # /workspace
     MEIPASS_DIR = BASE_DIR
 
 # При использовании proper package structure, sys.path добавление не требуется
@@ -25,8 +25,8 @@ def resource_path(relative_path):
     return MEIPASS_DIR / relative_path
 
 # Пути к папкам данных и логов
-DATA_DIR = resource_path("data")
-LOGS_DIR = resource_path("logs")
+DATA_DIR = BASE_DIR / "data"
+LOGS_DIR = BASE_DIR / "logs"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 

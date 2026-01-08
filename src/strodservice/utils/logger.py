@@ -4,9 +4,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 from typing import Optional
 
-# Добавляем корень проекта в sys.path (для импортов внутри utils)
-BASE_DIR = Path(__file__).resolve().parents[2]  # utils → strodservice → src → корень
-sys.path.insert(0, str(BASE_DIR))
+# Определяем корень проекта на основе расположения этого файла
+BASE_DIR = Path(__file__).resolve().parents[3]  # utils → strodservice → src → корень
 
 def setup_logger(
     name: str = "strodservice",
